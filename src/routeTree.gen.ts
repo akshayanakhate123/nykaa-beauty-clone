@@ -10,9 +10,14 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WishlistRouteImport } from './routes/wishlist'
+import { Route as TesterRouteImport } from './routes/tester'
+import { Route as StoreMapRouteImport } from './routes/store-map'
 import { Route as PlayRouteImport } from './routes/play'
+import { Route as LoyaltyRouteImport } from './routes/loyalty'
+import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CategoryRouteImport } from './routes/category'
 import { Route as CartRouteImport } from './routes/cart'
+import { Route as AiChatRouteImport } from './routes/ai-chat'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductIdRouteImport } from './routes/product.$id'
@@ -23,9 +28,29 @@ const WishlistRoute = WishlistRouteImport.update({
   path: '/wishlist',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TesterRoute = TesterRouteImport.update({
+  id: '/tester',
+  path: '/tester',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StoreMapRoute = StoreMapRouteImport.update({
+  id: '/store-map',
+  path: '/store-map',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PlayRoute = PlayRouteImport.update({
   id: '/play',
   path: '/play',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoyaltyRoute = LoyaltyRouteImport.update({
+  id: '/loyalty',
+  path: '/loyalty',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CategoryRoute = CategoryRouteImport.update({
@@ -36,6 +61,11 @@ const CategoryRoute = CategoryRouteImport.update({
 const CartRoute = CartRouteImport.update({
   id: '/cart',
   path: '/cart',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiChatRoute = AiChatRouteImport.update({
+  id: '/ai-chat',
+  path: '/ai-chat',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AccountRoute = AccountRouteImport.update({
@@ -62,9 +92,14 @@ const CategoryIdRoute = CategoryIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
+  '/ai-chat': typeof AiChatRoute
   '/cart': typeof CartRoute
   '/category': typeof CategoryRouteWithChildren
+  '/checkout': typeof CheckoutRoute
+  '/loyalty': typeof LoyaltyRoute
   '/play': typeof PlayRoute
+  '/store-map': typeof StoreMapRoute
+  '/tester': typeof TesterRoute
   '/wishlist': typeof WishlistRoute
   '/category/$id': typeof CategoryIdRoute
   '/product/$id': typeof ProductIdRoute
@@ -72,9 +107,14 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
+  '/ai-chat': typeof AiChatRoute
   '/cart': typeof CartRoute
   '/category': typeof CategoryRouteWithChildren
+  '/checkout': typeof CheckoutRoute
+  '/loyalty': typeof LoyaltyRoute
   '/play': typeof PlayRoute
+  '/store-map': typeof StoreMapRoute
+  '/tester': typeof TesterRoute
   '/wishlist': typeof WishlistRoute
   '/category/$id': typeof CategoryIdRoute
   '/product/$id': typeof ProductIdRoute
@@ -83,9 +123,14 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/account': typeof AccountRoute
+  '/ai-chat': typeof AiChatRoute
   '/cart': typeof CartRoute
   '/category': typeof CategoryRouteWithChildren
+  '/checkout': typeof CheckoutRoute
+  '/loyalty': typeof LoyaltyRoute
   '/play': typeof PlayRoute
+  '/store-map': typeof StoreMapRoute
+  '/tester': typeof TesterRoute
   '/wishlist': typeof WishlistRoute
   '/category/$id': typeof CategoryIdRoute
   '/product/$id': typeof ProductIdRoute
@@ -95,9 +140,14 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/account'
+    | '/ai-chat'
     | '/cart'
     | '/category'
+    | '/checkout'
+    | '/loyalty'
     | '/play'
+    | '/store-map'
+    | '/tester'
     | '/wishlist'
     | '/category/$id'
     | '/product/$id'
@@ -105,9 +155,14 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/account'
+    | '/ai-chat'
     | '/cart'
     | '/category'
+    | '/checkout'
+    | '/loyalty'
     | '/play'
+    | '/store-map'
+    | '/tester'
     | '/wishlist'
     | '/category/$id'
     | '/product/$id'
@@ -115,9 +170,14 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/account'
+    | '/ai-chat'
     | '/cart'
     | '/category'
+    | '/checkout'
+    | '/loyalty'
     | '/play'
+    | '/store-map'
+    | '/tester'
     | '/wishlist'
     | '/category/$id'
     | '/product/$id'
@@ -126,9 +186,14 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccountRoute: typeof AccountRoute
+  AiChatRoute: typeof AiChatRoute
   CartRoute: typeof CartRoute
   CategoryRoute: typeof CategoryRouteWithChildren
+  CheckoutRoute: typeof CheckoutRoute
+  LoyaltyRoute: typeof LoyaltyRoute
   PlayRoute: typeof PlayRoute
+  StoreMapRoute: typeof StoreMapRoute
+  TesterRoute: typeof TesterRoute
   WishlistRoute: typeof WishlistRoute
   ProductIdRoute: typeof ProductIdRoute
 }
@@ -142,11 +207,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WishlistRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tester': {
+      id: '/tester'
+      path: '/tester'
+      fullPath: '/tester'
+      preLoaderRoute: typeof TesterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/store-map': {
+      id: '/store-map'
+      path: '/store-map'
+      fullPath: '/store-map'
+      preLoaderRoute: typeof StoreMapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/play': {
       id: '/play'
       path: '/play'
       fullPath: '/play'
       preLoaderRoute: typeof PlayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/loyalty': {
+      id: '/loyalty'
+      path: '/loyalty'
+      fullPath: '/loyalty'
+      preLoaderRoute: typeof LoyaltyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/category': {
@@ -161,6 +254,13 @@ declare module '@tanstack/react-router' {
       path: '/cart'
       fullPath: '/cart'
       preLoaderRoute: typeof CartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-chat': {
+      id: '/ai-chat'
+      path: '/ai-chat'
+      fullPath: '/ai-chat'
+      preLoaderRoute: typeof AiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/account': {
@@ -209,9 +309,14 @@ const CategoryRouteWithChildren = CategoryRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccountRoute: AccountRoute,
+  AiChatRoute: AiChatRoute,
   CartRoute: CartRoute,
   CategoryRoute: CategoryRouteWithChildren,
+  CheckoutRoute: CheckoutRoute,
+  LoyaltyRoute: LoyaltyRoute,
   PlayRoute: PlayRoute,
+  StoreMapRoute: StoreMapRoute,
+  TesterRoute: TesterRoute,
   WishlistRoute: WishlistRoute,
   ProductIdRoute: ProductIdRoute,
 }
