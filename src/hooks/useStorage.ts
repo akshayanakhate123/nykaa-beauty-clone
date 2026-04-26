@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
+import type { Tier } from "@/data/nykaa";
 
 const listeners = new Map<string, Set<() => void>>();
 
@@ -73,4 +74,79 @@ export function useWishlist() {
     setItems((prev) => (prev.includes(id) ? prev.filter((p) => p !== id) : [...prev, id]));
   const has = (id: string) => items.includes(id);
   return { items, toggle, has, count: items.length };
+}
+
+// ============= Store Mode =============
+
+export type StoreModeState = {
+  active: boolean;
+  storeId: string | null;
+};
+
+export function useStoreMode() {
+  const [state, setState] = useLocalStorage<StoreModeState>("nykaa_store_mode", { active: false, storeId: null });
+  const activate = (storeId: string) => setState({ active: true, storeId });
+  const deactivate = () => setState({ active: false, storeId: null });
+  const toggle = (storeId: string) =>
+    setState((prev) => (prev.active ? { active: false, storeId: null } : { active: true, storeId }));
+  return { ...state, activate, deactivate, toggle };
+}
+
+// ============= Loyalty / Nykaa ONE =============
+
+export type LoyaltyState = {
+  points: number;
+  tier: Tier;
+  streak: number;
+  monthlyVisited: boolean;
+};
+
+export function useLoyalty() {
+  const [state] = useLocalStorage<LoyaltyState>("nykaa_loyalty", {
+    points: 4250,
+    tier: "gold",
+    streak: 5,
+    monthlyVisited: false,
+  });
+  return state;
+}
+
+// ============= BOPIS Orders =============
+
+export type BopisOrder = {
+  id: string;
+  storeId: string;
+  productIds: string[];
+  pickupBy: string;
+  status: "ready" | "picked-up";
+};
+
+export function useBopisOrders() {
+  const [orders, setOrders] = useLocalStorage<BopisOrder[]>("nykaa_bopis", []);
+  const add = (order: BopisOrder) => setOrders((prev) => [...prev, order]);
+  return { orders, add };
+}
+
+// ============= Tester Kit Bookings =============
+
+export type TesterBooking = {
+  id: string;
+  productIds: string[];
+  status: "booked" | "in-transit" | "delivered" | "converted";
+  bookedAt: string;
+};
+
+export function useTesterBookings() {
+  const [bookings, setBookings] = useLocalStorage<TesterBooking[]>("nykaa_testers", []);
+  const add = (productIds: string[]) => {
+    const booking: TesterBooking = {
+      id: `tk-${Date.now()}`,
+      productIds,
+      status: "booked",
+      bookedAt: new Date().toISOString(),
+    };
+    setBookings((prev) => [...prev, booking]);
+    return booking;
+  };
+  return { bookings, add };
 }

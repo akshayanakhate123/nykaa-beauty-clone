@@ -105,9 +105,9 @@ function CartPage() {
           </div>
 
           <div className="fixed bottom-14 left-1/2 -translate-x-1/2 w-full max-w-[440px] bg-background border-t border-border p-3 z-30">
-            <button className="w-full bg-primary text-primary-foreground font-bold py-3.5 rounded-lg text-sm">
+            <Link to="/checkout" className="block w-full bg-primary text-primary-foreground font-bold py-3.5 rounded-lg text-sm text-center">
               PROCEED TO CHECKOUT • ₹{total}
-            </button>
+            </Link>
           </div>
         </>
       )}
