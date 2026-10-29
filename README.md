@@ -42,13 +42,6 @@ src/
 └── styles.css       # Design tokens and Tailwind theme
 ```
 
-## Getting Started
-
-```bash
-bun install
-bun dev
-```
-
 Open the preview URL printed in the terminal.
 
 ## Notes
